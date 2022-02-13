@@ -22,7 +22,7 @@ class ProjectResource extends JsonResource
             'title' => $this->title,
             'categories' => $this->categories,
             'author' => $this->author,
-            'image_url' => $this->image_url,
+            'images' => $this->images,
             'release_data' => $this->release_data,
             'project_url' => $this->project_url,
             'project_version' => $this->project_version,
