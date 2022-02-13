@@ -40,9 +40,9 @@ class ProjectRepository implements ProjectRepositoryInterface
             'title' => $data['title'],
             'author' => $data['author'],
             'release_date' => Carbon::createFromFormat('Y-d-m', $data['release_date']),
-            'project_url' => $data['project_url'],
-            'project_version' => $data['project_version'],
-            'description' => $data['description']
+            'project_url' => $data['project_url'] ?? null,
+            'project_version' => $data['project_version'] ?? null,
+            'description' => $data['description'] ?? null
         ];
 
         if (is_array($data['categories']))
