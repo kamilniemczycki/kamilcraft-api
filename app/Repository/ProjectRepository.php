@@ -36,19 +36,27 @@ class ProjectRepository implements ProjectRepositoryInterface
 
     public function add(array $data)
     {
+        $toSave = [
+            'title' => $data['title'],
+            'author' => $data['author'],
+            'release_date' => Carbon::createFromFormat('Y-d-m', $data['release_date']),
+            'project_url' => $data['project_url'],
+            'project_version' => $data['project_version'],
+            'description' => $data['description']
+        ];
+
+        if (is_array($data['categories']))
+            $toSave['categories'] = $data['categories'];
+
+        if (is_array($data['images']))
+            $toSave['images'] = $data['images'];
+
+        if (!empty($data['update_date']))
+            $toSave['update_date'] = Carbon::createFromFormat('Y-d-m', $data['update_date']);
+
         $this->project
             ->query()
-            ->create([
-                'title' => $data['title'],
-                'categories' => $data['categories'],
-                'author' => $data['author'],
-                'images' => $data['images'],
-                'release_date' => Carbon::createFromFormat('Y-d-m', $data['release_date']),
-                'update_date' => Carbon::createFromFormat('Y-d-m', $data['update_date']),
-                'project_url' => $data['project_url'],
-                'project_version' => $data['project_version'],
-                'description' => $data['description']
-            ]);
+            ->create($toSave);
     }
 
 }
