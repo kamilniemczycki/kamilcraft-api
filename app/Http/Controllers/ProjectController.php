@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Repository\Interfaces\ProjectRepository;
@@ -14,12 +16,12 @@ class ProjectController extends Controller
 
     public function index()
     {
-
+        return $this->projectRepository->all();
     }
 
-    public function show()
+    public function show(int $project)
     {
-
+        return $this->projectRepository->get($project);
     }
 
 }

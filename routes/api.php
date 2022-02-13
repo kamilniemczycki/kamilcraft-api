@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,7 @@ Route::prefix('category')->group(function() {
     Route::get('{category}', 'CategoryController@showWhereSlug');
 });
 
-Route::get('projects', 'CategoryController@index');
+Route::get('projects', 'ProjectController@index');
 Route::prefix('project')->group(function() {
-    Route::get('{project}', 'CategoryController@showWhereSlug');
+    Route::get('{project}', 'ProjectController@show');
 });

@@ -29,8 +29,7 @@ class ProjectRepository implements ProjectRepositoryInterface
     {
         $project = $this->project
             ->query()
-            ->find($id)
-            ->first();
+            ->findOrFail($id);
         return new ProjectResource($project);
     }
 
