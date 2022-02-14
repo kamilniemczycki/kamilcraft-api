@@ -1,0 +1,15 @@
+form {
+    label, input {
+        display: block;
+        margin: 5px 10px;
+    }
+
+    input {
+        padding: 5px 10px;
+    }
+    span.error {
+        display: block;
+        padding: 0 10px 5px;
+        color: darkred;
+    }
+}
