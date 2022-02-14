@@ -13,4 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/');
+Route::name('admin.')->group(function () {
+    Route::namespace('Dashboard')->middleware('auth')->group(function () {
+        Route::get('', 'AdminPanelController')->name('home');
+    });
+    Route::name('auth.')->namespace('Auth')->group(function () {
+        Route::get('login', 'LoginController@login')->name('login');
+        Route::post('login', 'LoginController@authenticate')->name('authenticate');
+        Route::post('logout', 'LoginController@logout')->name('logout');
+    });
+});
