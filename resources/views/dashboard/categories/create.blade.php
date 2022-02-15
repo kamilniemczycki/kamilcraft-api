@@ -39,7 +39,7 @@
     <input id="default" type="checkbox" name="default" {{ old('default') != 0 ? 'checked' : '' }}>
 
     <label for="visible">Visible</label>
-    <input id="visible" type="checkbox" name="visible" {{ old('default') != 0 ? 'checked' : '' }}>
+    <input id="visible" type="checkbox" name="visible" {{ old('visible') != 0 ? 'checked' : '' }}>
 
     <input type="submit" value="Utwórz">
 </form>
