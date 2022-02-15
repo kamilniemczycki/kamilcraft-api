@@ -16,6 +16,20 @@ use Illuminate\Support\Facades\Route;
 Route::name('admin.')->group(function () {
     Route::namespace('Dashboard')->middleware('auth')->group(function () {
         Route::get('', 'AdminPanelController')->name('home');
+        Route::name('category.')->prefix('category')->group(function () {
+            Route::get('create', 'CategoryController@create')
+                ->name('create');
+            Route::post('', 'CategoryController@store')
+                ->name('store');
+            Route::get('{category}', 'CategoryController@edit')
+                ->name('edit');
+            Route::put('{category}', 'CategoryController@update')
+                ->name('update');
+            Route::get('{category}/delete', 'CategoryController@delete')
+                ->name('delete');
+            Route::delete('{category}/delete', 'CategoryController@destroy')
+                ->name('destroy');
+        });
     });
     Route::name('auth.')->namespace('Auth')->group(function () {
         Route::get('login', 'LoginController@login')->name('login');

@@ -13,6 +13,8 @@ use Illuminate\Support\Collection;
 class CategoryRepository implements CategoryRepositoryInterface
 {
 
+    public bool $auth = false;
+
     public function __construct(
         private Category $category
     ) {}
@@ -22,8 +24,12 @@ class CategoryRepository implements CategoryRepositoryInterface
         $categories = $this->category
             ->query()
             ->orderby('priority', 'ASC')
-            ->orderby('name', 'ASC')->get();
-        return (new CategoryCollection($categories))->collection;
+            ->orderby('name', 'ASC');
+
+        if (!$this->auth)
+            $categories->visibled();
+
+        return (new CategoryCollection($categories->get()))->collection;
     }
 
     public function get(string $slug): CategoryResource
@@ -32,12 +38,19 @@ class CategoryRepository implements CategoryRepositoryInterface
             ->query()
             ->where('slug', $slug)
             ->firstOrFail();
+
+        if (!$this->auth)
+            $category->visibled();
+
         return new CategoryResource($category);
     }
 
     public function update(Category $category, array $data = []): bool
     {
         $data = $this->parseToArray($data);
+        if (!$category->default && isset($data['default']) && $data['default'] === true)
+            $this->unsetDefault();
+
         return $category
             ->update($data);
     }
@@ -45,9 +58,20 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function create(array $data = []): Category
     {
         $data = $this->parseToArray($data);
+        if (isset($data['default']) && $data['default'] === true)
+            $this->unsetDefault();
+
         return $this->category
             ->query()
             ->create($data);
+    }
+
+    private function unsetDefault(): void
+    {
+        $this->category
+            ->query()
+            ->where('default', true)
+            ->first()?->update(['default' => false]);
     }
 
     private function parseToArray(array $data = []): array
@@ -58,10 +82,21 @@ class CategoryRepository implements CategoryRepositoryInterface
             $toSave['name'] = $data['name'];
         if (isset($data['slug']) && !empty($data['slug']))
             $toSave['slug'] = $data['slug'];
-        if (isset($data['default']) && is_bool($data['default']))
-            $toSave['default'] = $data['default'];
-        if (isset($data['visible']) && is_bool($data['visible']))
-            $toSave['visible'] = $data['visible'];
+        if (isset($data['priority']) && !is_integer($data['priority']))
+            $toSave['priority'] = (int)$data['priority'];
+
+        if (
+            isset($data['default']) &&
+            in_array($data['default'], ['yes', 'on', 1, true])
+        ) $toSave['default'] = true;
+        else $toSave['default'] = false;
+
+        if (
+            (isset($toSave['default']) && $toSave['default'] === true) ||
+            (isset($data['visible']) &&
+            in_array($data['visible'], ['yes', 'on', 1, true]))
+        ) $toSave['visible'] = true;
+        else $toSave['visible'] = false;
 
         return $toSave;
     }
