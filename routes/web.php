@@ -21,19 +21,41 @@ Route::name('admin.')->group(function () {
                 ->name('create');
             Route::post('', 'CategoryController@store')
                 ->name('store');
+
             Route::get('{category}', 'CategoryController@edit')
                 ->name('edit');
             Route::put('{category}', 'CategoryController@update')
                 ->name('update');
+
             Route::get('{category}/delete', 'CategoryController@delete')
                 ->name('delete');
             Route::delete('{category}/delete', 'CategoryController@destroy')
                 ->name('destroy');
         });
+
+        Route::name('project.')->prefix('project')->group(function () {
+            Route::get('create', 'ProjectController@create')
+                ->name('create');
+            Route::post('', 'ProjectController@store')
+                ->name('store');
+
+            Route::get('{project}', 'ProjectController@edit')
+                ->name('edit');
+            Route::put('{project}', 'ProjectController@update')
+                ->name('update');
+
+            Route::get('{project}/delete', 'ProjectController@delete')
+                ->name('delete');
+            Route::delete('{project}/delete', 'ProjectController@destroy')
+                ->name('destroy');
+        });
     });
     Route::name('auth.')->namespace('Auth')->group(function () {
-        Route::get('login', 'LoginController@login')->name('login');
-        Route::post('login', 'LoginController@authenticate')->name('authenticate');
-        Route::post('logout', 'LoginController@logout')->name('logout');
+        Route::get('login', 'LoginController@login')
+            ->name('login');
+        Route::post('login', 'LoginController@authenticate')
+            ->name('authenticate');
+        Route::post('logout', 'LoginController@logout')
+            ->name('logout');
     });
 });

@@ -25,6 +25,8 @@ class Project extends Model
 
     // use HasFactory;
 
+    protected $dateFormat = 'Y-m-d';
+
     protected $guarded = [];
     protected $casts = [
         'id' => 'integer',
@@ -32,10 +34,34 @@ class Project extends Model
         'categories' => 'array',
         'author' => 'string',
         'images' => 'array',
-        'release_data' => 'datetime:d-m-Y',
+        'release_date' => 'datetime:Y-m-d',
+        'update_date' => 'datetime:Y-m-d',
         'project_url' => 'string',
         'project_version' => 'string',
         'description' => 'string'
     ];
+
+    public function getReleaseDateAttribute($value): String
+    {
+        return $value;
+    }
+
+    public function setReleaseDateAttribute($value): void
+    {
+        $this->attributes['release_date'] = $value;
+    }
+
+    public function getUpdateDateAttribute($value): String|null
+    {
+        return $value;
+    }
+
+    public function setUpdateDateAttribute($value): void
+    {
+        if (!is_null($value))
+            $this->attributes['update_date'] = $value;
+        else
+            $this->attributes['update_date'] = null;
+    }
 
 }

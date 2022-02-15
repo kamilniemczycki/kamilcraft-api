@@ -63,7 +63,7 @@ class ProjectRepository implements ProjectRepositoryInterface
             $toSave['author'] = $data['author'];
 
         if (isset($data['release_date']))
-            $toSave['release_date'] = Carbon::createFromFormat('Y-d-m', $data['release_date']);
+            $toSave['release_date'] = $data['release_date'];
 
         if (isset($data['project_url']))
             $toSave['project_url'] = $data['project_url'];
@@ -76,12 +76,16 @@ class ProjectRepository implements ProjectRepositoryInterface
 
         if (isset($data['categories']) && is_array($data['categories']))
             $toSave['categories'] = $data['categories'];
+        else if (isset($data['categories']) && !empty($data['categories']))
+            $toSave['categories'] = explode(',', str_replace(', ', ',', $data['categories']));
 
         if (isset($data['images']) && is_array($data['images']))
             $toSave['images'] = $data['images'];
 
         if (isset($data['update_date']) && !empty($data['update_date']))
-            $toSave['update_date'] = Carbon::createFromFormat('Y-d-m', $data['update_date']);
+            $toSave['update_date'] = $data['update_date'];
+        else
+            $toSave['update_date'] = null;
 
         return $toSave;
     }
