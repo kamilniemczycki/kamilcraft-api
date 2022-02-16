@@ -65,8 +65,10 @@
     <span class="error">{{ $message }}</span>
     @enderror
 
-    <label for="visible">Visible</label>
-    <input id="visible" type="checkbox" name="visible" {{ old('visible') != 0 ? 'checked' : '' }}>
+    <div class="check-place">
+        <label for="visible">Visible</label>
+        <input id="visible" type="checkbox" name="visible" {{ old('visible') != 0 ? 'checked' : '' }}>
+    </div>
 
     <input type="submit" value="Utwórz">
 </form>
