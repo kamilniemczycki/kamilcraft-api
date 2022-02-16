@@ -15,9 +15,12 @@
 @endpush
 
 @section('main')
+<header>
+    <h1>Dashboard</h1>
+</header>
 @if(\Session::has('message'))
     <span>{{ \Session::get('message') }}</span>
 @endif
 @include('dashboard.projects.list')
-@include('dashboard.categories.list')
+@include('dashboard.aside')
 @endsection

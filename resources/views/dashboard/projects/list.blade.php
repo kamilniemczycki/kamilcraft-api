@@ -1,5 +1,7 @@
 <div class="projects">
-    <header><h1>Projekty</h1></header>
+    <header>
+        <h2>Projekty</h2>
+    </header>
     <a href="{{ route('admin.project.create') }}">
         <button>Utwórz nowy projekt</button>
     </a>

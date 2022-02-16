@@ -1,5 +1,7 @@
 <div class="categories">
-    <header><h1>Kategorie</h1></header>
+    <header>
+        <h2>Kategorie</h2>
+    </header>
     <a href="{{ route('admin.category.create') }}">
         <button>Utwórz nową kategorię</button>
     </a>
