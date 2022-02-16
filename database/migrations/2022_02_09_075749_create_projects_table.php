@@ -27,6 +27,7 @@ class CreateProjectsTable extends Migration
             $table->string('project_url', 255)->nullable()->default(null);
             $table->string('project_version', 20)->nullable()->default(null);
             $table->text('description')->nullable()->default(null);
+            $table->boolean('visible')->nullable()->default(false);
             $table->timestamps();
         });
     }

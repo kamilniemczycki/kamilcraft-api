@@ -14,7 +14,9 @@ class ProjectController
 
     public function __construct(
         private ProjectRepository $projectRepository
-    ) {}
+    ) {
+        $this->projectRepository->auth = true;
+    }
 
     public function edit(Project $project): View
     {

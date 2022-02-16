@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property int $id
@@ -38,7 +38,8 @@ class Project extends Model
         'update_date' => 'datetime:Y-m-d',
         'project_url' => 'string',
         'project_version' => 'string',
-        'description' => 'string'
+        'description' => 'string',
+        'visible' => 'boolean'
     ];
 
     public function getReleaseDateAttribute($value): String
@@ -62,6 +63,11 @@ class Project extends Model
             $this->attributes['update_date'] = $value;
         else
             $this->attributes['update_date'] = null;
+    }
+
+    public function scopeVisibled(Builder $builder)
+    {
+        return $builder->where('visible', true);
     }
 
 }

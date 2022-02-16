@@ -32,6 +32,7 @@ class ProjectRequest extends FormRequest
             'project_url' => 'nullable|string',
             'project_version' => 'nullable|string',
             'description' => 'nullable|string',
+            'visible' => 'nullable|in:yes,1,true,on'
         ];
     }
 }

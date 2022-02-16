@@ -24,7 +24,7 @@ class ProjectResource extends JsonResource
             'author' => $this->author,
             'images' => $this->images,
             'release_date' => $this->release_date,
-            'update_date' => $this->release_date,
+            'update_date' => $this->update_date,
             'project_url' => $this->project_url,
             'project_version' => $this->project_version,
             'description' => $this->description,

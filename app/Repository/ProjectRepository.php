@@ -8,11 +8,12 @@ use App\Http\Resources\ProjectCollection;
 use App\Http\Resources\ProjectResource;
 use App\Models\Project;
 use App\Repository\Interfaces\ProjectRepository as ProjectRepositoryInterface;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 class ProjectRepository implements ProjectRepositoryInterface
 {
+
+    public bool $auth = false;
 
     public function __construct(
         private Project $project
@@ -22,17 +23,23 @@ class ProjectRepository implements ProjectRepositoryInterface
     {
         $project = $this->project
             ->query()
-            ->orderBy('release_data', 'ASC')
-            ->get();
-        return (new ProjectCollection($project))->collection;
+            ->orderBy('release_data', 'ASC');
+
+        if (!$this->auth)
+            $project->visibled();
+
+        return (new ProjectCollection($project->get()))->collection;
     }
 
     public function get(int $id): ProjectResource
     {
         $project = $this->project
-            ->query()
-            ->findOrFail($id);
-        return new ProjectResource($project);
+            ->query();
+
+        if (!$this->auth)
+            $project->visibled();
+
+        return new ProjectResource($project->findOrFail($id));
     }
 
     public function update(Project $project, array $data = []): bool
@@ -86,6 +93,12 @@ class ProjectRepository implements ProjectRepositoryInterface
             $toSave['update_date'] = $data['update_date'];
         else
             $toSave['update_date'] = null;
+
+        if (
+            isset($data['visible']) &&
+            in_array($data['visible'], ['yes', 'on', 1, true])
+        ) $toSave['visible'] = true;
+        else $toSave['visible'] = false;
 
         return $toSave;
     }
