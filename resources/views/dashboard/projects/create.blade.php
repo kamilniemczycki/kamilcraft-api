@@ -47,6 +47,24 @@
     <span class="error">{{ $message }}</span>
     @enderror
 
+    <label for="image_small">Zdjęcie projektu - małe</label>
+    <input id="image_small" type="text" name="image_small" value="{{ old('image_small') }}">
+    @error('image_small')
+    <span class="error">{{ $message }}</span>
+    @enderror
+
+    <label for="image_medium">Zdjęcie projektu - średnie</label>
+    <input id="image_medium" type="text" name="image_medium" value="{{ old('image_medium') }}">
+    @error('image_medium')
+    <span class="error">{{ $message }}</span>
+    @enderror
+
+    <label for="image_large">Zdjęcie projektu - duże</label>
+    <input id="image_large" type="text" name="image_large" value="{{ old('image_large') }}">
+    @error('image_large')
+    <span class="error">{{ $message }}</span>
+    @enderror
+
     <label for="project_url">Adres projektu</label>
     <input id="project_url" type="text" name="project_url" value="{{ old('project_url') }}" placeholder="Adres www">
     @error('project_url')

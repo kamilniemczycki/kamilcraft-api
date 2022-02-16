@@ -29,6 +29,11 @@ class ProjectRequest extends FormRequest
             'categories' => 'nullable|string',
             'release_date' => 'required|date:Y-m-d',
             'update_date' => 'nullable|date:Y-m-d',
+
+            'image_small' => 'nullable|string',
+            'image_medium' => 'nullable|string',
+            'image_large' => 'nullable|string',
+
             'project_url' => 'nullable|string',
             'project_version' => 'nullable|string',
             'description' => 'nullable|string',

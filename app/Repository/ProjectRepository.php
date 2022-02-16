@@ -69,6 +69,10 @@ class ProjectRepository implements ProjectRepositoryInterface
         if (isset($data['author']))
             $toSave['author'] = $data['author'];
 
+        $toSave['images']['small'] = $data['image_small'] ?? '';
+        $toSave['images']['medium'] = $data['image_medium'] ?? '';
+        $toSave['images']['large'] = $data['image_large'] ?? '';
+
         if (isset($data['release_date']))
             $toSave['release_date'] = $data['release_date'];
 
