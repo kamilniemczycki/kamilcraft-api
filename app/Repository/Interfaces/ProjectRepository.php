@@ -11,7 +11,7 @@ use Illuminate\Support\Collection;
 interface ProjectRepository
 {
 
-    public function all(): Collection;
+    public function all(array $filters = []): Collection;
     public function get(int $id): ProjectResource;
     public function update(Project $project, array $data = []): bool;
     public function create(array $data = []): Project;

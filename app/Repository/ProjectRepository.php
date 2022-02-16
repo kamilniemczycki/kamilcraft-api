@@ -8,6 +8,7 @@ use App\Http\Resources\ProjectCollection;
 use App\Http\Resources\ProjectResource;
 use App\Models\Project;
 use App\Repository\Interfaces\ProjectRepository as ProjectRepositoryInterface;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 
 class ProjectRepository implements ProjectRepositoryInterface
@@ -19,11 +20,16 @@ class ProjectRepository implements ProjectRepositoryInterface
         private Project $project
     ) {}
 
-    public function all(): Collection
+    public function all(array $filters = []): Collection
     {
         $project = $this->project
             ->query()
             ->orderBy('release_data', 'ASC');
+
+        foreach ($filters as $filter_name => $filter_value) {
+            if ($filter_name === 'category' && $filter_value !== 'all')
+                $project->where('categories', 'like', '%"'. $filter_value .'"%');
+        }
 
         if (!$this->auth)
             $project->visibled();

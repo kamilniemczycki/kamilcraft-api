@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Repository\Interfaces\ProjectRepository;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -14,9 +15,17 @@ class ProjectController extends Controller
         private ProjectRepository $projectRepository
     ) {}
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->projectRepository->all();
+        $request->validate([
+            'category' => 'nullable|string|exists:categories,slug'
+        ]);
+        $filters = [];
+        if ($request->has('category') && ($category = $request->get('category')) !== '') {
+            $filters['category'] = $category;
+        }
+
+        return $this->projectRepository->all($filters);
     }
 
     public function show(int $project)
