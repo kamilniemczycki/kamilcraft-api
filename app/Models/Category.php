@@ -22,8 +22,8 @@ class Category extends Model
         'name' => 'string',
         'slug' => 'string',
         'priority' => 'integer',
-        'default' => 'bool',
-        'visible' => 'bool'
+        'default' => 'boolean',
+        'visible' => 'boolean'
     ];
 
     public function scopeVisibled(Builder $builder)
