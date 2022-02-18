@@ -44,7 +44,7 @@ class Project extends Model
 
     public function getReleaseDateAttribute($value): String
     {
-        return $value;
+        return Carbon::parse($value)->format('Y-m-d');
     }
 
     public function setReleaseDateAttribute($value): void
@@ -54,7 +54,7 @@ class Project extends Model
 
     public function getUpdateDateAttribute($value): String|null
     {
-        return $value;
+        return Carbon::parse($value)->format('Y-m-d');
     }
 
     public function setUpdateDateAttribute($value): void

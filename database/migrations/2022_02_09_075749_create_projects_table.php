@@ -21,7 +21,7 @@ class CreateProjectsTable extends Migration
             $table->string('title', 255);
             $table->json('categories')->nullable()->default(null);
             $table->string('author', 30);
-            $table->json('images')->nullable()->default('{"small":"","medium":"","large":""}');
+            $table->json('images')->nullable()->default(null);
             $table->dateTimeTz('release_date')->nullable()->useCurrent();
             $table->dateTimeTz('update_date')->nullable()->default(null);
             $table->string('project_url', 255)->nullable()->default(null);
