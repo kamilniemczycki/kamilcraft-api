@@ -24,7 +24,7 @@ class ProjectRepository implements ProjectRepositoryInterface
     {
         $project = $this->project
             ->query()
-            ->orderBy('release_data', 'ASC');
+            ->orderByDesc('release_date');
 
         foreach ($filters as $filter_name => $filter_value) {
             if ($filter_name === 'category' && $filter_value !== 'all')
