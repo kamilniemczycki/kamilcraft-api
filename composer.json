@@ -1,0 +1,25 @@
+{
+    "name": "kamilniemczycki/kamilcraft-api",
+    "description": "Api for kamilcraft.com",
+    "keywords": ["kamilcraft", "api"],
+    "license": "MIT",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Kamil Niemczycki",
+            "email": "contact@kamilcraft.com"
+        }
+    ],
+    "minimum-stability": "dev",
+	"prefer-stable": true,
+    "require": {
+		"php": "^8.0",
+        "symfony/dotenv": "5.3.7"
+    },
+	"autoload": {
+        "psr-4": {
+            "KamilCraftApi\\": "src/",
+            "KamilCraftApi\\App\\": "app/"
+        }
+    }
+}

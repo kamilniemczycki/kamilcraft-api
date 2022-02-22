@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "title": "Memstacja.pl",
+    "categories": ["selected", "private"],
+    "author": "Kamil Niemczycki",
+    "image": "assets/img/projects/kamilcraft.jpg",
+    "release_data": "28 sierpnia 2021",
+    "project_url": "https://memstacja.pl",
+    "version": "v1.4.9",
+    "description": "Memstacja.pl jest to strona z memami. Umożliwia dodanie własnego mema przez panel administracyjny, nadanie tagów i opisu. Użytkownicy mogą głosować przy użyciu serduszek, mając wpływ na pozycję danego mema na liście polecanych i TOP 10."
+  },
+  {
+    "id": 2,
+    "title": "edwardgoff-art.co.uk",
+    "categories": ["selected", "custom"],
+    "author": "Kamil Niemczycki",
+    "image": "assets/img/projects/edward.jpg",
+    "release_data": "25 sierpnia 2021",
+    "project_url": "https://edwardgoff-art.co.uk",
+    "version": "v1.1.4",
+    "description": "Strona jest wizytówką autora i galerią jego prac. Strona umożliwa tworzenie, a także dodawanie zdjęć i opisów dla utworzonych galerii."
+  }
+]

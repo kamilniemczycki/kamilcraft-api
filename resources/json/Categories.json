@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "name": "Wszystkie",
+    "slug": "all",
+    "default": true
+  },
+  {
+    "id": 3,
+    "name": "Prywatne",
+    "slug": "private"
+  },
+  {
+    "id": 4,
+    "name": "Zlecenie",
+    "slug": "custom"
+  },
+  {
+    "id": 5,
+    "name": "Wybrane",
+    "slug": "selected",
+    "visible": false
+  }
+]
