@@ -1,14 +1,41 @@
-# KamilCraft-API
+# KamilCraftAPI
 
-Api dla kamilcraft.com
+API for kamilcraft.com projects
 
-## O projekcie
+## Requirements
 
-Projekt ma za zadanie udostępnienie projektów i ich kategorii dla klienta,
-czyli dla projektu [KamilCraft.com - GitHub](https://github.com/kamilniemczycki/kamilcraft.com)
+### Required
 
-## Framework
+* Docker 20.10.x (Engine) or later
 
-Projekt zawiera dwa główne frameworki:
-* Laravel - jest wykorzystywany do interfejsu API dla drugiego projektu - klienta
-* Vuejs - jest użyty do renderingu utworzonych styli dla przyszłego panelu administracyjnego.
+### Optional
+
+* PHP 8.0 or later
+* Composer 2.3.x or later
+* Nodejs 16.14.x or later
+
+## Preparation and installation
+
+1) Copy the contents of the .env.example file into .env
+   ```shell
+   cp .env.example .env
+   ```
+
+2) Build the image needed for Laravel
+   ```shell
+   docker-compose build
+   ```
+
+3) Run the images prepared in ``docker-compose.yml``
+   ```shell
+   docker-compose up -d
+   ```
+
+4) Install the dependencies needed for Laravel and Nodejs. \
+   **The installer for Laravel generates the key and migrates the database.** \
+   **In the case of Nodejs, it generates page styles.**
+   ```shell
+   docker-compose exec laravel install
+   ```
+   
+5) Go to ``http://localhost/dashboard`` in your browser.
