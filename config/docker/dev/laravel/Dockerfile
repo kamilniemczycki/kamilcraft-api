@@ -10,7 +10,7 @@ RUN mkdir -p /home/$USER_NAME/.composer && \
 RUN set -eux \
     && apt-get update \
     && apt-get upgrade -y \
-    && apt-get install git zip unzip -y
+    && apt-get install git zip unzip dos2unix -y
 RUN curl -sS https://getcomposer.org/installer \
     | php -- --version=2.3.5 --install-dir=/usr/local/bin --filename=composer
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
@@ -19,6 +19,8 @@ RUN set -eux \
 RUN npm install --global npm@latest
 
 COPY ./install.sh /usr/local/bin/install
+RUN dos2unix /usr/local/bin/install \
+    && chmod +x /usr/local/bin/install
 
 USER $USER_UID
 
