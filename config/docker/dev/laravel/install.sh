@@ -12,7 +12,7 @@ if [ ! -d "vendor" ] && [ -f "composer.json" ]; then
         touch database/database.sqlite
     fi
     
-    php artisan migrate --seed
+    php artisan migrate:fresh --seed
 fi
 
 if [ ! -d "node_modules" ] && [ -f "package.json" ]; then
@@ -24,4 +24,5 @@ if [ ! -d "node_modules" ] && [ -f "package.json" ]; then
     npm run dev
 fi
 
+echo "$@"
 exec "$@"
