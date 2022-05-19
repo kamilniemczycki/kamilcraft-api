@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
@@ -14,7 +16,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Category extends Model
 {
-    // use HasFactory;
 
     protected $guarded = [];
     protected $casts = [
@@ -26,7 +27,7 @@ class Category extends Model
         'visible' => 'boolean'
     ];
 
-    public function scopeVisibled(Builder $builder)
+    public function scopeVisibled(Builder $builder): Builder
     {
         return $builder->where(function (Builder $query) {
             $query->where('visible', true)

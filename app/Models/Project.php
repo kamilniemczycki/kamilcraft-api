@@ -23,10 +23,7 @@ use Illuminate\Database\Eloquent\Builder;
 class Project extends Model
 {
 
-    // use HasFactory;
-
     protected $dateFormat = 'Y-m-d';
-
     protected $guarded = [];
     protected $casts = [
         'id' => 'integer',
@@ -65,7 +62,7 @@ class Project extends Model
             $this->attributes['update_date'] = null;
     }
 
-    public function scopeVisibled(Builder $builder)
+    public function scopeVisibled(Builder $builder): Builder
     {
         return $builder->where('visible', true);
     }
