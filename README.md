@@ -10,9 +10,9 @@ API for kamilcraft.com projects
 
 ### Optional
 
-* PHP 8.0 or later
-* Composer 2.3.x or later
-* Nodejs 16.14.x or later
+* PHP 8.1.x or later
+* Composer 2.4.x or later
+* Nodejs 18.14.x or later
 
 ## Preparation and installation
 
@@ -21,9 +21,9 @@ API for kamilcraft.com projects
    cp .env.example .env
    ```
 
-2) Build the image needed for Laravel
+2) Build the image needed for Laravel and Node.js
    ```shell
-   docker-compose build
+   docker-compose build --no-cache --pull
    ```
 
 3) Run the images prepared in ``docker-compose.yml``
@@ -31,11 +31,23 @@ API for kamilcraft.com projects
    docker-compose up -d
    ```
 
-4) Install the dependencies needed for Laravel and Nodejs. \
-   **The installer for Laravel generates the key and migrates the database.** \
-   **In the case of Nodejs, it generates page styles.**
+4) Install the dependencies needed for Laravel and Nodejs
    ```shell
-   docker-compose exec laravel install
+   docker-compose exec -u "$(id -u):$(id -g)" php composer install
    ```
-   
-5) Go to ``http://localhost/dashboard`` in your browser.
+   ```shell
+   docker-compose run --rm -u "$(id -u):$(id -g)" npm install
+   ```
+
+5) Key and data generation
+   ```shell
+   docker-compose exec -u "$(id -u):$(id -g)" php php artisan key:generate
+   ```
+   ```shell
+   docker-compose exec -u "$(id -u):$(id -g)" php php artisan migrate:fresh --seed
+   ```
+   ```shell
+   docker-compose run --rm -u "$(id -u):$(id -g)" npm run dev
+   ```
+
+6) Go to ``http://localhost/dashboard`` in your browser.
