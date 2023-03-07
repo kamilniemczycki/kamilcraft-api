@@ -18,7 +18,7 @@ RUN set -eux \
     && apt-get install nodejs -y
 RUN npm install --global npm@latest
 
-COPY ./install.sh /usr/local/bin/install
+COPY install.sh /usr/local/bin/install
 RUN dos2unix /usr/local/bin/install \
     && chmod +x /usr/local/bin/install
 
